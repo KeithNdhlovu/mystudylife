@@ -59,9 +59,9 @@ class User extends Authenticatable
         'deleted_at',
     ];
       
-    public function translations()
+    public function courses()
     {
-        return $this->hasMany('App\Models\Translation');
+        return $this->hasMany('App\Models\StudentCourse');
     }
 
     public function isAdministrator()
@@ -72,6 +72,11 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->user_type == 2;
+    }
+
+    public function isLecture()
+    {
+        return $this->user_type == 3;
     }
 
 }

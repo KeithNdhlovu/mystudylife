@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
+class StudentCourse extends Model
 {
+    
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'language';
+    protected $table = 'student_courses';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +20,7 @@ class Language extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'iso_code'
+        'student_id',
+        'course_id',
     ];
 }

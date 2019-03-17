@@ -63,7 +63,7 @@ class RegisterController extends Controller
                 'email'                 => 'required|email|max:255|unique:users',
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
-                "profile_picture"       => 'required|max:1024', // (max size 1 MB)
+                "profile_picture"       => 'max:1024', // (max size 1 MB)
             ]
         );
     }
@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'last_name'         => $data['last_name'],
             'email'             => $data['email'],
             'password'          => bcrypt($data['password']),
-            'user_type'         => 2,
+            'user_type'         => User::USER_TYPE_STUDENT,
             'id_number'         => $data['id_number'],
         ]);
 

@@ -34,12 +34,12 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+                            <input type="text" class="form-control" value="{{ old('first_name') }}" name="first_name" placeholder="First Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+                            <input type="text" class="form-control" value="{{ old('last_name') }}" name="last_name" placeholder="Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="col-form-label">Gender</label>
                         <div class="row">
                             <div class="col-sm-6">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <div class="input-group">
@@ -111,12 +111,12 @@
                         
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Profile Picture</label>
                       <div class="input-group">
                         <input type="file" name="profile_picture" class="form-control file-upload-info" placeholder="Upload Image">
                       </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary submit-btn btn-block">Register</button>
                     </div>

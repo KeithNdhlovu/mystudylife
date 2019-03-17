@@ -44,26 +44,26 @@ class UserController extends Controller
 
         if ($user->isAdministrator()) {
 
-            $translations = Translation::all();
+            // $translations = Translation::all();
             $users = User::all();
 
-            // Total Translations this week
-            $weeklyTranslations = $translations->filter(function($trans, $key) {
-                $predicateO = $trans->created_at->gte(Carbon::today()->startOfWeek());
-                $predicateT = $trans->created_at->lte(Carbon::today()->endOfWeek());
-                return  $predicateO && $predicateT;
-            })->count();
+            // // Total Translations this week
+            // $weeklyTranslations = $translations->filter(function($trans, $key) {
+            //     $predicateO = $trans->created_at->gte(Carbon::today()->startOfWeek());
+            //     $predicateT = $trans->created_at->lte(Carbon::today()->endOfWeek());
+            //     return  $predicateO && $predicateT;
+            // })->count();
 
-            $weeklyUsers = $users->filter(function($user, $key) {
-                $predicateO = $user->created_at->gte(Carbon::today()->startOfWeek());
-                $predicateT = $user->created_at->lte(Carbon::today()->endOfWeek());
-                return  $predicateO && $predicateT;
-            })->count();
+            // $weeklyUsers = $users->filter(function($user, $key) {
+            //     $predicateO = $user->created_at->gte(Carbon::today()->startOfWeek());
+            //     $predicateT = $user->created_at->lte(Carbon::today()->endOfWeek());
+            //     return  $predicateO && $predicateT;
+            // })->count();
 
             $data = [
-                'allTranslations' => $translations->count(),
-                'weeklyTranslations' => $weeklyTranslations,
-                'weeklyUsers' => $weeklyUsers,
+                'allTranslations' => 0,
+                'weeklyTranslations' => 0,
+                'weeklyUsers' => 0,
                 'allUsers' => $users->count(),
             ];
 

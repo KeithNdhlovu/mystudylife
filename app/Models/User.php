@@ -12,6 +12,10 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
+    const USER_TYPE_ADMIN    = 1;
+    const USER_TYPE_STUDENT  = 2;
+    const USER_TYPE_LECTURE  = 3;
+
     /**
      * The database table used by the model.
      *
@@ -66,17 +70,16 @@ class User extends Authenticatable
 
     public function isAdministrator()
     {
-        return $this->user_type == 1;
+        return $this->user_type == $this::USER_TYPE_ADMIN;
     }
 
     public function isUser()
     {
-        return $this->user_type == 2;
+        return $this->user_type == $this::USER_TYPE_STUDENT;
     }
 
     public function isLecture()
     {
-        return $this->user_type == 3;
+        return $this->user_type == $this::USER_TYPE_LECTURE;
     }
-
 }

@@ -16393,6 +16393,11 @@ ul {
   background-size: cover; 
 }
 
+.auth.auth-bg-3 {
+  background: url("../images/Students.jpg");
+  background-size: cover; 
+}
+
 .auth.theme-one .auto-form-wrapper .form-group .input-group .form-control {
     border: 1px solid #e5e5e5 !important;
     border-radius: 6px;

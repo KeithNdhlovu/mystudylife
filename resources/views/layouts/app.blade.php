@@ -63,7 +63,7 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         
-        <div class="page-wrapper">
+        <div id="page-wrapper">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
@@ -90,16 +90,8 @@
     <script src="{{ asset('theme/pixel-html/js/jquery.slimscroll.js') }}"></script>
     <!--Wave Effects -->
     <script src="{{ asset('theme/pixel-html/js/waves.js') }}"></script>
-    <!--Counter js -->
-    <script src="{{ asset('theme/plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
-    <script src="{{ asset('theme/plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
-    <!--Morris JavaScript -->
-    <script src="{{ asset('theme/plugins/bower_components/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('theme/plugins/bower_components/morrisjs/morris.js') }}"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('theme/pixel-html/js/custom.min.js') }}"></script>
-    <script src="{{ asset('theme/pixel-html/js/dashboard1.js') }}"></script>
-    <script src="{{ asset('theme/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
+    <script src="{{ asset('theme/pixel-html/js/custom.js') }}"></script>
     
     @yield('scripts')
 </body>

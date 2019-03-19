@@ -4,26 +4,20 @@
 
 
 @section('content')
-
   <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
-    <div class="row page-titles">
-        <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Profile</h3>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Profile</li>
-            </ol>
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Profile</h4> 
         </div>
-        <div class="col-md-7 col-4 align-self-center">
-            
-        </div>
+        <!-- /.col-lg-12 -->
     </div>
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
+    
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
@@ -64,23 +58,7 @@
 
     <div class="row">
         <!-- Column -->
-        <div class="col-lg-4 col-xlg-3 col-md-5">
-            <div class="card">
-                <div class="card-block">
-                    <center class="m-t-30"> <img src="{{ route('public.profile-picture') }}" class="img-circle" width="150">
-                        <h4 class="card-title m-t-10">{{ Auth::user()->first_name .' '. Auth::user()->last_name }}</h4>
-                        <h6 class="card-subtitle">{{ Auth::user()->isAdministrator() ? 'Administrator' : 'User' }}</h6>
-                        <!-- <div class="row text-center justify-content-md-center">
-                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
-                        </div> -->
-                    </center>
-                </div>
-            </div>
-        </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="col-lg-7">
             <div class="card">
                 <div class="card-block">
                     {!! Form::model($user, array('action' => array('UsersManagementController@update', $user->id), 'method' => 'PUT')) !!}
@@ -91,7 +69,7 @@
                             {!! Form::label('email', 'E-mail' , array('class' => 'col-md-3 control-label')); !!}
                             <div class="col-xs-12">
                                 <div class="form-line">
-                                    {!! Form::text('email', old('email'), array('autocomplete' => 'off', 'id' => 'email', 'class' => 'form-control form-control-line', 'placeholder' => trans('forms.ph-useremail'))) !!}
+                                    {!! Form::text('email', old('email'), array('autocomplete' => 'off', 'id' => 'email', 'class' => 'form-control ', 'placeholder' => trans('forms.ph-useremail'))) !!}
                                 </div>
                             </div>
                         </div>
@@ -100,7 +78,7 @@
                             {!! Form::label('first_name', trans('forms.create_user_label_firstname'), array('class' => 'col-md-3 control-label')); !!}
                             <div class="col-xs-12">
                             <div class="form-line">
-                                {!! Form::text('first_name', NULL, array('autocomplete' => 'off', 'id' => 'first_name', 'class' => 'form-control form-control-line', 'placeholder' => trans('forms.create_user_ph_firstname'))) !!}
+                                {!! Form::text('first_name', NULL, array('autocomplete' => 'off', 'id' => 'first_name', 'class' => 'form-control ', 'placeholder' => trans('forms.create_user_ph_firstname'))) !!}
                             </div>
                             @if ($errors->has('first_name'))
                                 <span class="help-block">
@@ -114,7 +92,7 @@
                             {!! Form::label('last_name', trans('forms.create_user_label_lastname'), array('class' => 'col-md-3 control-label')); !!}
                             <div class="col-xs-12">
                             <div class="form-line">
-                                {!! Form::text('last_name', NULL, array('autocomplete' => 'off', 'id' => 'last_name', 'class' => 'form-control form-control-line', 'placeholder' => trans('forms.create_user_ph_lastname'))) !!}
+                                {!! Form::text('last_name', NULL, array('autocomplete' => 'off', 'id' => 'last_name', 'class' => 'form-control ', 'placeholder' => trans('forms.create_user_ph_lastname'))) !!}
                             </div>
                             @if ($errors->has('last_name'))
                                 <span class="help-block">
@@ -128,7 +106,7 @@
                             {!! Form::label('id_number', 'ID Number', array('class' => 'col-md-3 control-label')); !!}
                             <div class="col-xs-12">
                             <div class="form-line">
-                                {!! Form::text('id_number', NULL, array('id' => 'id_number', 'class' => 'form-control form-control-line', 'placeholder' => 'ID Number')) !!}
+                                {!! Form::text('id_number', NULL, array('id' => 'id_number', 'class' => 'form-control ', 'placeholder' => 'ID Number')) !!}
                             </div>
                             @if ($errors->has('id_number'))
                                 <span class="help-block">
@@ -152,7 +130,7 @@
                             {!! Form::label('password_confirmation', trans('forms.create_user_label_pw_confirmation'), array('class' => 'col-md-3 control-label')); !!}
                             <div class="col-xs-12">
                                 <div class="form-line">
-                                {!! Form::password('password_confirmation', array('autocomplete' => 'off', 'id' => 'password_confirmation', 'class' => 'form-control form-control-line', 'placeholder' => trans('forms.create_user_ph_pw_confirmation'))) !!}
+                                {!! Form::password('password_confirmation', array('autocomplete' => 'off', 'id' => 'password_confirmation', 'class' => 'form-control ', 'placeholder' => trans('forms.create_user_ph_pw_confirmation'))) !!}
                                 
                                 </div>
                             </div>
@@ -178,7 +156,6 @@
     <!-- End PAge Content -->
     <!-- ============================================================== -->
   </div>
-
   @include('modals.modal-save')
   @include('modals.modal-delete')
 @endsection

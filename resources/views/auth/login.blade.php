@@ -1,7 +1,7 @@
 @extends('layouts.appClean')
 
 @section('content')
-<div class="content-wrapper d-flex align-items-center auth theme-one">
+<div class="content-wrapper d-flex align-items-center auth auth-bg-3 theme-one">
     <div class="row w-100">
         <div class="col-sm-6 col-lg-4 mx-auto">
             <div class="auto-form-wrapper">

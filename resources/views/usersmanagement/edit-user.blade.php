@@ -34,9 +34,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body bg-success">
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <br/>
-                        <h2 class="text-white">
+                        <h2 class="text-white text-center">
                             {{ Session::get('success') }}
                         </h2>
                         <br/>
@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body bg-danger">
-                    <div class="col-12">
+                    <div class="col-lg-12 text-center">
                         <br/>
                         @foreach ($errors->all() as $error)
                             <p class="text-white">{{ $error }}</p>

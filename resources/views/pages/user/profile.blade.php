@@ -27,11 +27,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body bg-success">
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <br/>
-                        <h2 class="text-white">
+                        <h2 class="text-white text-center">
                             {{ Session::get('success') }}
                         </h2>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -61,7 +62,7 @@
         <div class="col-lg-7">
             <div class="card">
                 <div class="card-block">
-                    {!! Form::model($user, array('action' => array('UsersManagementController@update', $user->id), 'method' => 'PUT')) !!}
+                    {!! Form::model($user, array('action' => array('UserController@update'), 'method' => 'POST')) !!}
 
                         {!! csrf_field() !!}
 

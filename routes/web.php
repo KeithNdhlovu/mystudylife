@@ -39,20 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Reports
     Route::get('/reports', ['uses' => 'UserController@reports']);
-
-    // Translate pages    
-    Route::get('/translate', ['uses' => 'UserController@showTranslate'])->name('user.showTranslate');
-    Route::post('/translation/create', ['uses' => 'UserController@doCreateTranslation'])->name('user.translate');
-    Route::post('/translation/create-suggestion', ['uses' => 'UserController@doCreateTranslationSuggestion'])->name('user.create-suggestion');
-    Route::post('/translation/approve-suggestion', ['uses' => 'UserController@doApproveTranslationSuggestion'])->name('user.approve-suggestion');
-
-    // Transactions
-    Route::get('/transactions', ['uses' => 'UserController@showTransactions'])->name('user.transactions');
-    Route::get('/orders', ['uses' => 'UserController@showOrders'])->name('user.orders');
-    Route::get('/tickets', ['uses' => 'UserController@showTickets'])->name('user.tickets');
 });
 
-Route::group(['middleware'=> ['auth']], function () {
+Route::group(['middleware'=> ['auth', 'admin']], function () {
 
     Route::resource('users', 'UsersManagementController', [
         'names' => [

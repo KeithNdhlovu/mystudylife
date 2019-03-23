@@ -61,10 +61,10 @@ class UserController extends Controller
             // })->count();
 
             $data = [
-                'allTranslations' => 0,
-                'weeklyTranslations' => 0,
-                'weeklyUsers' => 0,
-                'allUsers' => $users->count(),
+                'lectures' => 0,
+                'students' => 0,
+                'attendances' => 0,
+                'users' => $users
             ];
 
             return view('pages.admin.home', $data);    

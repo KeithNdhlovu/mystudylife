@@ -8,9 +8,50 @@
 @endsection
 
 @section('content')
-
-  <div class="container">
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Create User</h4> 
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+            <a href="{{ url('/home') }}" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Dashboard</a>
+            <ol class="breadcrumb">
+                <li><a href="{{ url('/users') }}">Users</a></li>
+                <li class="active"><a href="#">Create</a></li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    @if(Session::has('success'))
     <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body bg-success">
+                    <div class="col-12">
+                        <br/>
+                        <h2 class="text-white">
+                            {{ Session::get('success') }}
+                        </h2>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+  
+    <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-body">
@@ -88,7 +129,7 @@
                       <option value="">{{ trans('forms.create_user_ph_role') }}</option>
                       @if ($roles->count())
                         @foreach($roles as $role)
-                          <option value="{{ $role->id }}">{{ $role->slug }}</option>
+                          <option value="{{ $role->id }}" {{ (old('role') == $role->id) ? 'selected="selected"' : '' }}>{{ $role->slug }}</option>
                         @endforeach
                       @endif
                     </select>
@@ -97,6 +138,28 @@
                   @if ($errors->has('role'))
                     <span class="help-block error">
                         <strong>{{ $errors->first('role') }}</strong>
+                    </span>
+                  @endif
+                </div>
+              </div>
+
+              <div class="form-group has-feedback row {{ $errors->has('course') ? ' has-error ' : '' }}">
+                {!! Form::label('course', 'Select Course', array('class' => 'col-md-3 control-label')); !!}
+                <div class="col-md-12">
+                  <div class="input-group">
+                    <select class="form-control" name="course" id="course">
+                      <option value="">Select Course</option>
+                      @if ($courses->count())
+                        @foreach($courses as $course)
+                          <option value="{{ $course->id }}" {{ (old('course') == $course->id) ? 'selected="selected"' : '' }}>{{ $course->name }}</option>
+                        @endforeach
+                      @endif
+                    </select>
+                    <label class="input-group-addon" for="name"><i class="fa fa-fw {{ trans('forms.create_user_icon_role') }}" aria-hidden="true"></i></label>
+                  </div>
+                  @if ($errors->has('course'))
+                    <span class="help-block error">
+                        <strong>{{ $errors->first('course') }}</strong>
                     </span>
                   @endif
                 </div>
@@ -140,8 +203,8 @@
         </div>
       </div>
     </div>
-  </div>
 
+</div>
 @endsection
 
 @section('footer_scripts')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Traits\CaptureIpTrait;
 use Auth;
 use Illuminate\Http\Request;
@@ -34,6 +35,12 @@ class UsersManagementController extends Controller
         $role->slug = 'User';
         $roles->push($role);
 
+        $role = new \StdClass;
+        $role->id = 3;
+        $role->name = 'Lecture';
+        $role->slug = 'Lecture';
+        $roles->push($role);
+
         $this->roles = $roles;
 
         $this->middleware('auth');
@@ -62,7 +69,8 @@ class UsersManagementController extends Controller
         $roles = $this->roles;
         
         $data = [
-            'roles'         => $roles,
+            'roles' => $roles,
+            'courses' => Course::all(['id', 'name']),
         ];
 
         return view('usersmanagement.create-user')->with($data);
@@ -78,6 +86,7 @@ class UsersManagementController extends Controller
     public function store(Request $request)
     {
 
+        $data = $request->all();
 
         $rules = [
             'first_name'            => 'required',
@@ -86,23 +95,30 @@ class UsersManagementController extends Controller
             'password'              => 'required|min:6|max:20|confirmed',
             'password_confirmation' => 'required|same:password',
             'role'                  => 'required',
-            'id_number'             => 'required',
+            'id_number'             => 'required|max:13|unique:users',
         ];
 
-        $validator = Validator::make($request->all(),
-           $rules,
-            [
-                'first_name.required'   => trans('auth.fNameRequired'),
-                'last_name.required'    => trans('auth.lNameRequired'),
-                'email.required'        => trans('auth.emailRequired'),
-                'email.email'           => trans('auth.emailInvalid'),
-                'password.required'     => trans('auth.passwordRequired'),
-                'password.min'          => trans('auth.PasswordMin'),
-                'password.max'          => trans('auth.PasswordMax'),
-                'role.required'         => trans('auth.roleRequired'),
-                'id_number.required'    => 'Please enter ID Number',
-            ]
-        );
+        $messages = [
+            'first_name.required'   => trans('auth.fNameRequired'),
+            'last_name.required'    => trans('auth.lNameRequired'),
+            'email.required'        => trans('auth.emailRequired'),
+            'email.email'           => trans('auth.emailInvalid'),
+            'password.required'     => trans('auth.passwordRequired'),
+            'password.min'          => trans('auth.PasswordMin'),
+            'password.max'          => trans('auth.PasswordMax'),
+            'role.required'         => trans('auth.roleRequired'),
+            'id_number.required'    => 'Please enter ID Number',
+        ];
+
+        if ($request->has('role')) {
+            
+            if ($request->input('role') == User::USER_TYPE_STUDENT) {
+                $rules['course'] = 'required';
+                $messages['course.required'] = 'Please select course for this student';
+            }
+        }
+
+        $validator = Validator::make($data, $rules, $messages);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

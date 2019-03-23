@@ -6,9 +6,12 @@
         </a>
         <div class="top-left-part">
             <a class="logo" href="{{ url('/') }}">
-                <b>&nbsp;&nbsp;&nbsp;&nbsp;MyStudyLife</b>
+                <span class="hidden-md hidden-lg">
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;MSL</b>
+                </span>
                 <span class="hidden-xs">
                     <!-- MyStudyLife -->
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;MyStudyLife</b>
                 </span>
             </a>
         </div>

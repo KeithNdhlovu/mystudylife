@@ -3,7 +3,7 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse slimscrollsidebar">
         <ul class="nav" id="side-menu">
-            <li style="padding: 10px 0 0;">
+            <li>
                 <a href="{{ url('/') }}" {{ (Request::is('/') || Request::is('home') || Request::is('dashboard')) ? 'class=active' : null }}>
                     <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
                     <span class="hide-menu">Dashboard</span>
@@ -15,6 +15,21 @@
                     <span class="hide-menu">Profile</span>
                 </a>
             </li>
+
+            @if (Auth::user()->isAdministrator())
+            <li>
+                <a href="{{ url('/users') }}" {{ Request::is('users') ? 'class=active' : null }}>
+                    <i class="fa fa-list fa-fw" aria-hidden="true"></i>
+                    <span class="hide-menu">Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/users/create') }}" {{ Request::is('users/create') ? 'class=active' : null }}>
+                    <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    <span class="hide-menu">Create User</span>
+                </a>
+            </li>
+            @endif
             <!-- <li>
                 <a href="basic-table.html" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><span class="hide-menu">Basic Table</span></a>
             </li>

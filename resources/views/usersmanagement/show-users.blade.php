@@ -23,23 +23,41 @@
 @endsection
 
 @section('content')
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">LIST OF USERS</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+            <a href="{{ url('/home') }}" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Dashboard</a>
+            <ol class="breadcrumb">
+                <li><a class="active" href="{{ url('/users') }}">Users</a></li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">SHOWING ALL USERS</h4>
             <div class="table-responsive">
             <table class="table table-striped data-table dataTable js-exportable">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Email</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
                         <th>ID Number</th>
+                        <th>Email</th>
                         <th>Created</th>
                         <th>Updated</th>
-                        <th>Actions</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -56,27 +74,32 @@
                         @endif
                         
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
                             <td>{{$user->first_name}}</td>
                             <td>{{$user->last_name}}</td>
                             <td>
-                                <span class="badge badge-{{$user->isAdministrator() ? 'primary' : 'warning' }}">{{ ($user->user_role == 1) ? "Admin" : "User"}}</span>
+                                @if ($user->isAdministrator())
+                                    <span class="badge badge-danger">Admin</span>
+                                @elseif ($user->isUser())
+                                    <span class="badge badge-success">User</span>
+                                @elseif ($user->isLecture())
+                                    <span class="badge badge-primary">Lecture</span>
+                                @endif
                             </td>
                             <td>{{ $user->id_number }}</td>
+                            <td><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
                             <td>{{ $user->created_at }}</td>
                             <td>{{ $user->updated_at }}</td>
                             <td>
                                 {!! Form::open(array('url' => 'users/' . $user->id, 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Delete')) !!}
                                     {!! Form::hidden('_method', 'DELETE') !!}
-                                    {!! Form::button('<i class="mdi mdi-delete"></i>', array('class' => 'btn btn-icons btn-rounded btn-danger','type' => 'button','data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this user ?')) !!}
+                                    {!! Form::button('<i class="fa fa-trash"></i>', array('class' => 'btn btn-icons btn-rounded btn-danger','type' => 'button','data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this user: '. $user->first_name . ' ' . $user->last_name  .'  ?')) !!}
                                 {!! Form::close() !!}
                             </td>
                             <td>
                                 <a class="btn btn-icons btn-rounded btn-success" 
                                     href="{{ URL::to('users/' . $user->id) }}" 
                                     data-toggle="tooltip" title="Show">
-                                    <i class="mdi mdi-eye"></i>
+                                    <i class="fa fa-eye"></i>
                                 </a>
                             </td>
                             <td>
@@ -84,7 +107,7 @@
                                     href="{{ URL::to('users/' . $user->id . '/edit') }}" 
                                     data-toggle="tooltip" 
                                     title="Edit">
-                                    <i class="mdi mdi-pencil"></i>
+                                    <i class="fa fa-edit"></i>
                                 </a>
                             </td>
                         </tr>
@@ -95,9 +118,9 @@
         </div>
         </div>
     </div>
+</div>    
+@include('modals.modal-delete')
 
-    @include('modals.modal-delete')
-    
 @endsection
     
 @section('scripts')

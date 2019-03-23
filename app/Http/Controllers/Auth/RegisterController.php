@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Storage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Profile;
+use App\Models\StudentCourse;
 use App\Traits\ActivationTrait;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
@@ -59,6 +59,7 @@ class RegisterController extends Controller
             [
                 'first_name'            => 'required',
                 'last_name'             => 'required',
+                'course_id'             => 'required',
                 'id_number'             => 'required|max:13|unique:users',
                 'email'                 => 'required|email|max:255|unique:users',
                 'password'              => 'required|min:6|max:20|confirmed',
@@ -96,6 +97,14 @@ class RegisterController extends Controller
         }
         
         $user->save();
+
+        // Lets create a link between this user and the selected course
+        if (isset($data['course_id'])) {
+            StudentCourse::create([
+                'student_id' => $user->id,
+                'course_id' => $data['course_id']
+            ]);
+        }
 
         return $user;
     }

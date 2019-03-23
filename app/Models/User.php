@@ -63,9 +63,9 @@ class User extends Authenticatable
         'deleted_at',
     ];
       
-    public function courses()
+    public function course()
     {
-        return $this->hasMany('App\Models\StudentCourse');
+        return $this->hasOne('App\Models\StudentCourse');
     }
 
     public function isAdministrator()

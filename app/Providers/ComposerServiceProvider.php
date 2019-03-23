@@ -14,15 +14,9 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // View::composer(
-        //     [
-        //         'compliments.create', 
-        //         'surveys.create', 
-        //         'complaints.create', 
-        //         'compliments.createTransport',
-        //         'complaints.createTransport'
-        //     ], 'App\Http\ViewComposers\HospitalComposer'
-        // );
+        View::composer(
+            'auth.register', 'App\Http\ViewComposers\CourseComposer'
+        );
     }
 
     /**

@@ -55,35 +55,25 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label class="col-form-label">Gender</label>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-radio" style="pointer-events: none">
-                                    <label class="form-check-label">
-                                    <input 
-                                        type="radio" 
-                                        class="form-check-input" 
-                                        name="membershipRadios" 
-                                        id="membershipRadios1" 
-                                        ng-checked="isMale == true"> Male
-                                    <i class="input-helper"></i></label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-radio" style="pointer-events: none">
-                                    <label class="form-check-label">
-                                    <input 
-                                        type="radio" 
-                                        class="form-check-input" 
-                                        name="membershipRadios" 
-                                        id="membershipRadios2" 
-                                        ng-checked="isMale == false"> Female
-                                    <i class="input-helper"></i></label>
-                                </div>
-                            </div>
+                    <div class="form-group" style="pointer-events: none">
+                        <div class="input-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            ng-model="gender" 
+                            placeholder="---" 
+                            required>
                         </div>
-                    </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <select name="course_id" class="form-control form-control-line">
+                            <option value="">Select Course</option>
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <div class="input-group">
@@ -150,13 +140,15 @@
 
             registerApp.controller('registerController', ['$scope','$http', '$window', '$filter','$timeout' , function($scope, $http, $window, $filter, $timeout) {
 
-                $scope.passLength = 0
+                $scope.passLength  = 0;
                 $scope.passLengthT = 0;
+                $scope.gender      = "---";
 
                 $scope.stripID = function(idNumber) {
                     
                     if (idNumber == "") {
-                        $scope.student_gender = null;
+                        $scope.isMale = null;
+                        $scope.gender = "---";
                         return;
                     }
 
@@ -176,6 +168,7 @@
                     };
 
                     $scope.isMale = isMale;
+                    $scope.gender = data.gender;
                 }
 
                 $scope.onChangeTrigger = function(trigger) {

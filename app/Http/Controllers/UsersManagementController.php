@@ -29,7 +29,7 @@ class UsersManagementController extends Controller
         $roles->push($role);
 
         $role = new \StdClass;
-        $role->id = 1;
+        $role->id = 2;
         $role->name = 'User';
         $role->slug = 'User';
         $roles->push($role);
